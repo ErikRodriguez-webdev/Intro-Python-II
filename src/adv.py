@@ -1,5 +1,5 @@
 from room import Room
-from player import Player_Info
+from player import Player
 
 # Declare all the rooms
 
@@ -39,8 +39,8 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
-player_start = {'currently': 'outside'}
-# Player_Info(player_start.currently)
+user_name = input("Enter your name: ")
+player_start = Player(user_name, room['outside'])
 
 # Write a loop that:
 #
@@ -53,18 +53,21 @@ player_start = {'currently': 'outside'}
 #
 # If the user enters "q", quit the game.
 
-move = input(
-    "Enter a cardinal direction to move to a room. (n,e,s,w) \n Quit game. (q)")
+user_is_playing = True
 
-if move == "n":
-    print("Heads To North Room")
-elif move == "e":
-    print("Heads To East Room")
-elif move == "s":
-    print("Heads To South Room")
-elif move == "w":
-    print("Heads To North Room")
-elif move == "q":
-    print("Later...")
-else:
-    print("Sorry But The Movement Character You Entered Is Not Allowed")
+while user_is_playing:
+    print(player_start.current_room.name)
+
+    print(player_start.current_room.description)
+
+    user_input = input(
+        "Enter a cardinal direction to explore. (n,e,s,w) \n Want To Quit The Game? (q) \n What will you do? ")
+
+    if user_input in ["n", "e", "s", "w"]:
+        print("Heads towards...")
+        player_start.move(user_input)
+    elif user_input == "q":
+        print("Later...")
+        user_playing = False
+    else:
+        print("Sorry But The Movement Character You Entered Is Not Allowed")
