@@ -61,13 +61,13 @@ while user_is_playing:
     print(player_start.current_room.description)
 
     user_input = input(
-        "Enter a cardinal direction to explore. (n,e,s,w) \n Want To Quit The Game? (q) \n What will you do? ")
+        " Enter a cardinal direction to explore. (n,e,s,w) \n Want To Quit The Game? (q) \n What will you do? ")
 
     if user_input in ["n", "e", "s", "w"]:
         print("Heads towards...")
         player_start.move(user_input)
     elif user_input == "q":
         print("Later...")
-        user_playing = False
+        user_is_playing = False
     else:
         print("Sorry But The Movement Character You Entered Is Not Allowed")
