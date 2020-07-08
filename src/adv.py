@@ -1,25 +1,32 @@
 from room import Room
 from player import Player
+from item import Item
+
+# Declare items for rooms
+pencil = Item("pencil", "is mightier than a sword")
+knife = Item("knife", "is light-weight and sharp")
+stick = Item("stick", "is thin and fragile")
+rock = Item("rock", "is rough with jagged edges")
+rope = Item("rope", "is long and useful when tied")
 
 # Declare all the rooms
-
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+                     "North of you, the cave mount beckons", pencil),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east."""),
+passages run north and east.""", knife),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm."""),
+the distance, but there is no way across the chasm.""", stick),
 
     'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air."""),
+to north. The smell of gold permeates the air.""", rock),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south."""),
+earlier adventurers. The only exit is to the south.""", rope),
 }
 
 
@@ -60,14 +67,16 @@ while user_is_playing:
 
     print(player_start.current_room.description)
 
+    print(f"A {player_start.current_room.items.name} is on the floor, it {player_start.current_room.items.description}")
+
     user_input = input(
-        " Enter a cardinal direction to explore. (n,e,s,w) \n Want To Quit The Game? (q) \n What will you do? ")
+        " Enter a cardinal direction to explore. (N,E,S,W) \n Want To Quit The Game? (Q) \n What will you do? ").lower()
 
     if user_input in ["n", "e", "s", "w"]:
-        print("Heads towards...")
+        print(f"{user_name} heads toward...")
         player_start.move(user_input)
     elif user_input == "q":
-        print("Later...")
+        print(f"Goodbye {user_name}...")
         user_is_playing = False
     else:
-        print("Sorry But The Movement Character You Entered Is Not Allowed")
+        print("The Key You Entered Is Invalid. Please use N,E,S,W")

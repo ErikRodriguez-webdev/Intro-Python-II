@@ -2,9 +2,10 @@
 # currently.
 
 class Player():
-    def __init__(self, name, current_room):
+    def __init__(self, name, current_room, items=None):
         self.name = name
         self.current_room = current_room
+        self.items = items
 
     def move(self, direction):
         if direction == "n" and self.current_room.n_to:
