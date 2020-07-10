@@ -5,7 +5,7 @@ class Player():
     def __init__(self, name, current_room, items=None):
         self.name = name
         self.current_room = current_room
-        self.items = items
+        self.items = items if items is not None else []
 
     def move(self, direction):
         if direction == "n" and self.current_room.n_to:

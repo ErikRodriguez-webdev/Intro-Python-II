@@ -73,13 +73,13 @@ while user_is_playing:
         print("****************** \n Items Found!")
 
         for item in player_start.current_room.items:
-            print(f" A {item.name} is on the floor, it {item.description}")
+            print(f"{item.name.upper()}: {item.description}")
 
-        print("****************** \n Current Inventory:")
+        print("****************** \n Inventory Limit is 3:")
 
         if player_start.items is not None:
             for items in player_start.items:
-                print(items)
+                print(items.name.upper())
         else:
             print(" Your inventory is empty.")
 
@@ -89,30 +89,19 @@ while user_is_playing:
     if user_input[0] in ["n", "e", "s", "w"]:
         print(f"{user_name} heads toward...")
         player_start.move(user_input[0])
-    elif user_input[0] == "take":
-        for item in player_start.current_room.items:
-            if user_input[1] == item:
-                player_start.items.append(item)
+    elif user_input[0] == "take" and player_start.current_room.items and len(player_start.items) < 3:
+        for i in range(0, len(player_start.current_room.items)):
+            if user_input[1] == player_start.current_room.items[i].name:
+                selected_item = player_start.current_room.items.pop(i)
+                player_start.items.append(selected_item)
+                continue
+    elif user_input[0] == "drop" and len(player_start.items) > 0:
+        for i in range(0, len(player_start.items)):
+            if user_input[1] == player_start.items[i].name:
+                player_start.items.pop(i)
+                continue
     elif user_input[0] == "q":
         print(f"Goodbye {user_name}...")
         user_is_playing = False
     else:
         print("The Key You Entered Is Invalid. Please use N,E,S,W")
-
-
-# # if items exist in room then ask if they want to see them
-#         for i in range(len(player_start.current_room.items)):
-#             print(
-#                 f"A {player_start.current_room.items[i].name} is on the floor, it {player_start.current_room.items[i].description}")
-
-#         if player_start.items is not None:
-#             for items in player_start.items:
-#                 print(items)
-#         else:
-#             print("Your inventory is empty.")
-
-#         user_test = input("To pickup an item type: 'take <Item Name Here>' ")
-
-#         # check if user test is pickup
-#         if user_test[:4] == "take":
-#             pass
